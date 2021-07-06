@@ -128,7 +128,7 @@ class FamilyStructure:
 
         return None
 
-    def get_all_descendents(self, id):
+    def get_all_descendants(self, id):
         for grandparent in self._members:
             if grandparent['id'] == id:
                 children = []
