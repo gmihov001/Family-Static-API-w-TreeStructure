@@ -12,19 +12,128 @@ class FamilyStructure:
     def __init__(self, last_name):
         self.last_name = last_name
         # example list of members
-        self._members = []
+        self._members = [
+            {
+                "children": [
+                    {
+                    "children": [
+                        {
+                            "first_name": "Jimmy",
+                            "id": 5005,
+                            "last_name": "Jackson"
+                        }
+                    ],
+                    "first_name": "John",
+                    "id": 2002,
+                    "last_name": "Jackson"
+                    },
+                    {
+                    "children": [
+                        {
+                            "first_name": "Tom",
+                            "id": 1072,
+                            "last_name": "Jackson",
+                            "parent": "Tim"
+                        },
+                        {
+                            "first_name": "Sue",
+                            "id": 6634,
+                            "last_name": "Jackson",
+                            "parent": "Tim"
+                        },
+                        {
+                            "first_name": "Kim",
+                            "id": 3655,
+                            "last_name": "Jackson",
+                            "parent": "Tim"
+                        }
+                    ],
+                    "first_name": "Tim",
+                    "id": 6298,
+                    "last_name": "Jackson",
+                    "parent": "Bill"
+                    },
+                    {
+                    "first_name": "Lynn",
+                    "id": 2310,
+                    "last_name": "Jackson",
+                    "parent": "Bill"
+                    }
+                ],
+                "first_name": "Bill",
+                "id": 1001,
+                "last_name": "Jackson"
+            },
+            {
+                "children": [
+                    {
+                    "children": [
+                        {
+                            "first_name": "Tom",
+                            "id": 7417,
+                            "last_name": "Jackson",
+                            "parent": "Simon"
+                        },
+                        {
+                            "first_name": "Jim",
+                            "id": 7932,
+                            "last_name": "Jackson",
+                            "parent": "Simon"
+                        }
+                    ],
+                    "first_name": "Simon",
+                    "id": 8195,
+                    "last_name": "Jackson",
+                    "parent": "Judy"
+                    }
+                ],
+                "first_name": "Judy",
+                "id": 9130,
+                "last_name": "Jackson"
+            }
+        ]
 
     # read-only: Use this method to generate random members ID's when adding members into the list
     def _generateId(self):
         return randint(1, 9999)
 
+    # def add_member(self, member):
+    #     if 'id' in member:
+    #         self._members.append(member)
+    #     else:
+    #         member['id'] = self._generateId()
+    #         self._members.append(member)    
+    #     return None
+
     def add_member(self, member):
-        if 'id' in member:
-            self._members.append(member)
+        member['id'] = self._generateId()
+        member['last_name'] = self.last_name
+        if 'parent' in member:
+            for grandparent in self._members:
+                print("grandparent", grandparent)
+                if grandparent['first_name'] == member['parent']:
+                    if 'children' in grandparent:
+                        grandparent['children'].append(member)
+                    else:
+                        grandparent['children'] = [member]  
+                else:
+                    for parent in grandparent['children']:
+                        if parent['first_name'] == member['parent']:
+                            if 'children' in parent:
+                                parent['children'].append(member)
+                            else:
+                                parent['children'] = [member]            
         else:
-            member['id'] = self._generateId()
-            self._members.append(member)    
+            self._members.append(member)
+
         return None
+
+    def get_all_descendents(self, id):
+        for grandparent in self._members:
+            if grandparent['id'] == id:
+                return {
+                    "children": ', '.join(str(child['first_name']) for child in [*grandparent['children']])
+                }
 
     def delete_member(self, id):
         # fill this method and update the return

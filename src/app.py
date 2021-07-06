@@ -32,6 +32,11 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
+@app.route('/descendents/<int:id>')
+def get_descendents(id):
+    descendents = jackson_family.get_all_descendents(id)
+    return jsonify(descendents), 200
+
 @app.route('/member', methods=['POST'])
 def post_member():
     member = request.json        
