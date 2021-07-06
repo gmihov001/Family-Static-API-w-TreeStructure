@@ -166,6 +166,19 @@ class FamilyStructure:
                                 'grandparent': child['parent'] 
                             }    
 
+    def get_siblings(self, id):
+        for grandparent in self._members:
+            for child in grandparent['children']:
+                if child['id'] == id:
+                    return {"siblings": [str(child['first_name']) for child in grandparent['children']]}
+                # else:
+                #     for grandchild in child['children']:
+                #         if grandchild['id'] == id:
+                #             return {
+                #                 'parent': grandchild['parent'],
+                #                 'grandparent': child['parent'] 
+                #             }                            
+
 
     def delete_member(self, id):
         # fill this method and update the return
