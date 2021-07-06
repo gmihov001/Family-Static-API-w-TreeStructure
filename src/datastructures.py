@@ -25,7 +25,8 @@ class FamilyStructure:
                     ],
                     "first_name": "John",
                     "id": 2002,
-                    "last_name": "Jackson"
+                    "last_name": "Jackson",
+                    "parent": "Bill"
                     },
                     {
                     "children": [
@@ -170,7 +171,9 @@ class FamilyStructure:
         for grandparent in self._members:
             for child in grandparent['children']:
                 if child['id'] == id:
-                    return {"siblings": [str(child['first_name']) for child in grandparent['children']]}
+                    return {"siblings": [
+                        str(child['first_name']) for child in grandparent['children'] if child['id'] != id
+                    ]}
                 # else:
                 #     for grandchild in child['children']:
                 #         if grandchild['id'] == id:

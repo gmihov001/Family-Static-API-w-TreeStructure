@@ -42,6 +42,11 @@ def get_ancestors(id):
     ancestors = jackson_family.get_ancestors(id)
     return jsonify(ancestors), 200    
 
+@app.route('/siblings/<int:id>')
+def get_siblings(id):
+    siblings = jackson_family.get_siblings(id)
+    return jsonify(siblings), 200        
+
 @app.route('/member', methods=['POST'])
 def post_member():
     member = request.json        
