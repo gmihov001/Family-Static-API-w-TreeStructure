@@ -131,9 +131,20 @@ class FamilyStructure:
     def get_all_descendents(self, id):
         for grandparent in self._members:
             if grandparent['id'] == id:
+                children = []
+                grandchildren = []
+                for child in grandparent['children']:
+                    children.append(child['first_name'])
+                    if 'children' in child:
+                        for grandchild in child['children']:
+                            grandchildren.append(grandchild['first_name'])   
                 return {
-                    "children": ', '.join(str(child['first_name']) for child in [*grandparent['children']])
+                    "children": children,
+                    "grandchildren": grandchildren
                 }
+
+    # def get_all_ancestors(self, id):
+
 
     def delete_member(self, id):
         # fill this method and update the return
