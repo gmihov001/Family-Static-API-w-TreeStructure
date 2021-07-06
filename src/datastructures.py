@@ -153,7 +153,11 @@ class FamilyStructure:
                             "grandchildren": "none"
                         }            
 
-    # def get_all_ancestors(self, id):
+    def get_ancestors(self, id):
+        for grandparent in self._members:
+            for child in grandparent['children']:
+                if child['id'] == id:
+                    return {"parent": child['parent']}
 
 
     def delete_member(self, id):
