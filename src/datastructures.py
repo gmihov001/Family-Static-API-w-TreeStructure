@@ -98,14 +98,6 @@ class FamilyStructure:
     def _generateId(self):
         return randint(1, 9999)
 
-    # def add_member(self, member):
-    #     if 'id' in member:
-    #         self._members.append(member)
-    #     else:
-    #         member['id'] = self._generateId()
-    #         self._members.append(member)    
-    #     return None
-
     def add_member(self, member):
         member['id'] = self._generateId()
         member['last_name'] = self.last_name
