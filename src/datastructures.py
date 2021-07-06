@@ -148,10 +148,10 @@ class FamilyStructure:
                         children = []
                         for child in parent['children']:
                             children.append(child['first_name'])
-                    return {
-                        "children": children,
-                        "grandchildren": "none"
-                    }            
+                        return {
+                            "children": children,
+                            "grandchildren": "none"
+                        }            
 
     # def get_all_ancestors(self, id):
 
