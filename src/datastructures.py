@@ -158,6 +158,13 @@ class FamilyStructure:
             for child in grandparent['children']:
                 if child['id'] == id:
                     return {"parent": child['parent']}
+                else:
+                    for grandchild in child['children']:
+                        if grandchild['id'] == id:
+                            return {
+                                'parent': grandchild['parent'],
+                                'grandparent': child['parent'] 
+                            }    
 
 
     def delete_member(self, id):
