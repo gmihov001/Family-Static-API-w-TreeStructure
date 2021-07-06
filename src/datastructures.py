@@ -142,6 +142,16 @@ class FamilyStructure:
                     "children": children,
                     "grandchildren": grandchildren
                 }
+            else:
+                for parent in grandparent['children']:
+                    if parent['id'] == id:
+                        children = []
+                        for child in parent['children']:
+                            children.append(child['first_name'])
+                    return {
+                        "children": children,
+                        "grandchildren": "none"
+                    }            
 
     # def get_all_ancestors(self, id):
 
